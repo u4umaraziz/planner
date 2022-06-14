@@ -6,6 +6,5 @@
 
 
     <include file="classpath:/changelog/schema.xml" relativeToChangelogFile="true" />
-    <include file="classpath:/changelog/data.xml" relativeToChangelogFile="true" />
 
 </databaseChangeLog>
