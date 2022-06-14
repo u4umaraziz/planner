@@ -17,5 +17,29 @@
         </createTable>
     </changeSet>
 
+    <changeSet id="02-Slots-Roster Schema" author="Umar">
+        <createTable tableName="slots">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="slot_name" type="VARCHAR(50)"  />
+            <column name="start_time" type="datetime" />
+            <column name="end_time" type="datetime"/>
+            <column name="duration" type="number(1)"/>
+        </createTable>
+        <createTable tableName="roster">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="worker_id" type="BIGINT" />
+            <column name="slot_id" type="BIGINT" />
+            <column name="date" type="datetime"/>
+        </createTable>
+        <addForeignKeyConstraint baseTableName="roster" baseColumnNames="worker_id" constraintName="workerIdFK" referencedTableName="worker"
+                                 referencedColumnNames="id" />
+        <addForeignKeyConstraint baseTableName="roster" baseColumnNames="slot_id" constraintName="slotIdFK" referencedTableName="slots"
+                                 referencedColumnNames="id" />
+    </changeSet>
+
 
 </databaseChangeLog>

@@ -32,6 +32,33 @@ paths:
           $ref: '#/components/responses/WorkerResponseBody'
         400:
           $ref: '#/components/responses/ErrorResponseBody'
+  /slots:
+    get:
+      summary: Service for get all slots information
+      operationId: getSlots
+      description: Get All Slots
+      tags:
+        - Slots
+      responses:
+        200:
+          description: OK
+          $ref: '#/components/responses/SlotsResponseBody'
+        400:
+          $ref: '#/components/responses/ErrorResponseBody'
+  /assign:
+    post:
+      summary: Service for assigning slot to worker
+      operationId: assignSlot
+      description: Assign Slot
+      tags:
+        - Roster
+      requestBody:
+        $ref: '#/components/requestBodies/RosterRequestBody'
+      responses:
+        200:
+          description: OK
+        400:
+          $ref: '#/components/responses/ErrorResponseBody'
 
 components:
   requestBodies:
@@ -41,6 +68,12 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/WorkerRequest'
+    RosterRequestBody:
+      description: Assign Slot to Worker
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/AssignSlotRequest'
   responses:
     ErrorResponseBody:
       description: Response that contains error information
@@ -56,6 +89,14 @@ components:
             type: array
             items:
               $ref: '#/components/schemas/WorkerResponse'
+    SlotsResponseBody:
+      description: Return all slots
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/SlotResponse'
   schemas:
     #Requests
     WorkerRequest:
@@ -65,6 +106,19 @@ components:
           type: string
       required:
         - name
+    AssignSlotRequest:
+      type: object
+      properties:
+        slot_id:
+          type: number
+        worker_id:
+          type: number
+        date:
+          type: string
+      required:
+        - slot_id
+        - worker_id
+        - date
     # RESPONSES
     ErrorResponse:
       properties:
@@ -79,4 +133,16 @@ components:
         id:
           type: number
         name:
+          type: string
+    SlotResponse:
+      properties:
+        id:
+          type: number
+        name:
+          type: string
+        startTime:
+          type: string
+        endTime:
+          type: string
+        duration:
           type: string

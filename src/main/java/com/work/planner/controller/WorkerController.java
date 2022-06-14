@@ -23,8 +23,8 @@ public class WorkerController implements WorkerApi {
     private final WorkerMapper workerMapper;
 
     @Override
-    public ResponseEntity<Void> saveWorker(RosterWorkerRequest rosterWorkerRequest) {
-        Worker savedModel = workerService.save(workerMapper.mapToEntity(rosterWorkerRequest));
+    public ResponseEntity<Void> saveWorker(final RosterWorkerRequest rosterWorkerRequest) {
+        final Worker savedModel = workerService.save(workerMapper.mapToEntity(rosterWorkerRequest));
         log.info("Saved with ID: {} ", savedModel.getId());
 
         return ResponseEntity.ok().build();
