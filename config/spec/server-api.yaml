@@ -1,0 +1,82 @@
+openapi: "3.0.0"
+info:
+  version: 1.0.0
+  title: Planner API Documentation
+servers:
+  - url: http://127.0.0.1:8080
+paths:
+  /worker:
+    post:
+      summary: Service for saving worker
+      operationId: saveWorker
+      description: Save Worker
+      tags:
+        - Worker
+      requestBody:
+        $ref: '#/components/requestBodies/WorkerRequestBody'
+      responses:
+        200:
+          description: OK
+        400:
+          $ref: '#/components/responses/ErrorResponseBody'
+  /workers:
+    get:
+      summary: Service for getting all workers
+      operationId: getAllWorkers
+      description: Get All Workers
+      tags:
+        - Worker
+      responses:
+        200:
+          description: OK
+          $ref: '#/components/responses/WorkerResponseBody'
+        400:
+          $ref: '#/components/responses/ErrorResponseBody'
+
+components:
+  requestBodies:
+    WorkerRequestBody:
+      description: Save Worker Request Body
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/WorkerRequest'
+  responses:
+    ErrorResponseBody:
+      description: Response that contains error information
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    WorkerResponseBody:
+      description: Return all workers
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/WorkerResponse'
+  schemas:
+    #Requests
+    WorkerRequest:
+      type: object
+      properties:
+        name:
+          type: string
+      required:
+        - name
+    # RESPONSES
+    ErrorResponse:
+      properties:
+        code:
+          type: string
+        title:
+          type: string
+        message:
+          type: string
+    WorkerResponse:
+      properties:
+        id:
+          type: number
+        name:
+          type: string

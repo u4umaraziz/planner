@@ -1,0 +1,15 @@
+{
+  "java11": "true",
+  "dateLibrary": "java11",
+  "useBeanValidation": "true",
+  "useTags": "true",
+  "generateApiTests": "false",
+  "generateApiDocumentation": "false",
+  "supportingFiles": "false",
+  "serializableModel": "true",
+  "basePackage": "com.work.planner",
+  "modelPackage": "com.work.planner.model",
+  "apiPackage": "com.work.planner.api",
+  "configPackage": "com.work.planner.config",
+  "additionalModelTypeAnnotations": "@com.work.planner.config.OpenApiGenerated"
+}
